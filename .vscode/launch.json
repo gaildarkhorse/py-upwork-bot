@@ -1,0 +1,7 @@
+{
+    "name": "Your Debug Configuration",
+    "type": "python",
+    "request": "launch",
+    "justMyCode": false,  // Add this line to disable justMyCode
+    // Other configuration properties...
+  }
