@@ -1,5 +1,8 @@
 import os
 import time
+import pyautogui
+#import pyscreeze
+#from pyscreeze import center, grab, pixel, pixelMatchesColor, screenshot
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -31,7 +34,6 @@ class Select(object):
         wait = WebDriverWait(driver, 10)
         wait.until(EC.element_to_be_clickable(self.element))
 
-
 # Install multiple extensions on a profile
 def install_extensions_on_profile( profile_directory, extension_paths ) :
     chrome_options = Options()
@@ -51,9 +53,66 @@ def install_extensions_on_profile( profile_directory, extension_paths ) :
     # Join the unpacked extension paths with commas
     unpacked_extensions_argument = ",".join(unpacked_extension_paths)
     chrome_options.add_argument("--load-extension=" + unpacked_extensions_argument)
-    #chrome_options.add_argument("--start-maximized")
+    chrome_options.add_argument("--start-maximized")
     
-    return webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
+    
+   
+    #extn_btn_location1 = pyautogui.locateOnScreen('Screenshot_1.png')
+    #print(extn_btn_location1)
+    #btn1_x, btn1_y = pyautogui.center(extn_btn_location1)
+    #pyautogui.click(btn1_x, btn1_y)
+
+    #extn_btn_location2 = pyautogui.locateOnScreen('Screenshot_1.png')
+    #print(extn_btn_location2)
+    #btn2_x, btn2_y = pyautogui.center(extn_btn_location2)
+    #pyautogui.click(btn2_x, btn2_y)
+
+    screen_width, screen_height = pyautogui.size()
+    print("Screen width:", screen_width)
+    print("Screen height:", screen_height)
+
+    extn_btn1_loc_width = 176
+    extn_btn1_loc_height = 97
+    extn_btn2_loc_width = 268
+    extn_btn2_loc_height = 304
+    extn_btn3_loc_width = 268
+    extn_btn3_loc_height = 367
+    extn_btn4_loc_width = 268
+    extn_btn4_loc_height = 416
+    
+    # click extension button in menu bar
+    click_position1_x = screen_width - extn_btn1_loc_width
+    click_position1_y = extn_btn1_loc_height
+    #pyautogui.moveTo(click_position1_x, click_position1_y, duration=3)
+    pyautogui.click(click_position1_x, click_position1_y)
+    print(">>>>>>", click_position1_x, click_position1_y)
+    #time.sleep(1)
+
+    # click extenstion inner button (eg: x-block) in popup menu
+    click_position2_x = screen_width - extn_btn2_loc_width
+    click_position2_y = extn_btn2_loc_height
+    #pyautogui.moveTo(click_position2_x, click_position2_y, duration=1)
+    pyautogui.click(click_position2_x, click_position2_y)
+    print(">>>>>>", click_position2_x, click_position2_y)
+    #time.sleep(1)
+
+    # click extenstion inner button (eg: x-block) in popup menu
+    click_position3_x = screen_width - extn_btn3_loc_width
+    click_position3_y = extn_btn3_loc_height
+    #pyautogui.moveTo(click_position3_x, click_position3_y, duration=1)
+    pyautogui.click(click_position3_x, click_position3_y)
+    print(">>>>>>", click_position3_x, click_position3_y)
+    #time.sleep(1)
+
+    # click extenstion inner button (eg: x-block) in popup menu
+    click_position4_x = screen_width - extn_btn4_loc_width
+    click_position4_y = extn_btn4_loc_height
+    #pyautogui.moveTo(click_position4_x, click_position4_y, duration=1)
+    pyautogui.click(click_position4_x, click_position4_y)
+    print(">>>>>>", click_position4_x, click_position4_y)
+    pyautogui.moveTo(screen_width / 2, screen_height  * 2 / 3 , duration=1)
+    return driver
 
 def find_element_available(driver, element_criteria):
     flag = 1
@@ -135,6 +194,7 @@ def step2_createNewAccountPage( driver, email ):
             element.send_keys(firstName)
             
             element = driver.find_element(By.ID, 'last-name-input')
+            
             element.clear()
             element.send_keys(lastName)
             
